@@ -1,0 +1,21 @@
+
+使用PyQT5设计好程序后将.ui文件转化为.py文件后需要添加一些代码才可以运行
+
+
+1、在转化的文件头部导入模块
+	import sys,os
+	from PyQt5 import QtCore, QtGui, QtWidgets
+	from PyQt5.QtCore import *
+	from PyQt5.QtWidgets import *
+	from PyQt5.QtGui import *
+
+2、在函数setupUi(self, Form)尾部加上Form.show()
+
+3、在Py文件尾部加上下面代码
+	if __name__ == "__main__":
+	    app = QApplication(sys.argv)
+	    form = QWidget()
+	    w = Ui_Form()                   #Ui_类名（），因为自动生成的类名为Ui_objectname()
+	    w.setupUi(form)
+	    form.show()
+    sys.exit(app.exec_())
