@@ -7,10 +7,10 @@
 点击：file-》Settings-Tools-》External Tools，点击 + 号，添加两个External Tools
 1、添加QTDesigner
 	Name：QtDesigner
-	Program：D:\Program Files\Python36\Lib\site-packages\pyqt5-tools\designer.exe
 	Working directory：$FileDir$
 2、添加PyUIC
 	Name：PyUIC
+	Program：D:\Program Files\Python36\Lib\site-packages\pyqt5-tools\designer.exe
 	Program：D:\Program Files\Python36\python.exe
   Working directory：$FileDir$
   
