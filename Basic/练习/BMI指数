@@ -1,0 +1,21 @@
+'''
+请根据BMI公式（体重除以身高的平方）计算BMI指数，BMI指数说明：
+低于18.5：过轻
+18.5-25：正常
+25-28：过重
+28-32：肥胖
+高于32：严重肥胖
+'''
+height = float(input('请输入身高(米)：'))
+weight = float(input('请输入体重(KG)：'))
+BMI = weight / (height**2)
+if BMI < 18.5:
+    print('体型过轻')
+elif 18.5 <= BMI < 25:
+    print('体型正常')
+elif 25 <= BMI < 28:
+    print('体型过重')
+elif 28 <= BMI < 32:
+    print('体型肥胖')
+elif BMI >= 32:
+    print('严重肥胖')
