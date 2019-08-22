@@ -1,0 +1,26 @@
+
+class Animal(object):
+    def run(self):
+        print('%s is running' % type(self).__name__)
+
+
+class Pets:
+    def __init__(self):
+        self.name = "'哈士奇'"
+
+    def pet(self):
+        print('this is %s' % self.name)
+
+
+class Husky(Animal, Pets):
+    def fun(self):
+        print('this is %s' % type(self).__name__)
+
+
+p = Pets()
+
+p.pet()
+
+h = Husky()
+h.name = "'二哈'"
+h.pet()
