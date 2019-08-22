@@ -20,7 +20,7 @@ dog.run()
 
 # 判断变量是否是某个类型
 print(isinstance(animal, Animal))
-print(isinstance(dog, Animal))
+print(isinstance(dog, (Animal, Dog)))
 print(isinstance(dog, Dog))
 
 
