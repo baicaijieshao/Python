@@ -1,7 +1,13 @@
-# 父类
+from types import MethodType
+
+
 class Animal(object):
     def run(self):
         print('%s is running' % type(self).__name__)
+
+
+def set_age(self, age):
+    self.age = age
 
 
 animal = Animal()
@@ -17,6 +23,18 @@ class Dog(Animal):
 dog = Dog()
 dog.run()
 
+# 给实例绑定一个方法
+animal.set_age = MethodType(set_age, animal)
+animal.set_age(25)
+print(animal.age)
+
+# 给实例绑定方法，但是其他的实例不可以使用
+# dog.set_age(28)
+# print(dog.age)
+# 直接给父类绑定方法，父类的实例以及子类的实例都可以使用
+Animal.set_age = set_age
+dog.set_age(28)
+print(dog.age)
 
 # 判断变量是否是某个类型
 print(isinstance(animal, Animal))
