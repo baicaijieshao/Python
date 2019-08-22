@@ -1,0 +1,28 @@
+
+# 如果想要限制实例对象，比如只允许Student实例添加name和age属性
+# 可以在定义class时，定义一个特殊的__slots__变量,来限制该class实例能添加的属性
+
+
+class Student:
+    __slots__ = ('name',  'age')
+
+
+s1 = Student()
+s1.name = 'Xiao'
+s1.age = 18
+# 绑定或设置对象其他的属性都会提示AttributeError错误
+# s1.score = 100
+# setattr(s1, 'score', 100)
+
+
+class Pupil(Student):
+    pass
+
+
+# __slots__只对父类有效，有子类不起作用的
+p1 = Pupil()
+p1.score = 100
+print(p1.score)
+
+
+
