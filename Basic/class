@@ -1,0 +1,36 @@
+# 父类
+class Animal(object):
+    def run(self):
+        print('%s is running' % type(self).__name__)
+
+
+animal = Animal()
+animal.run()
+
+
+# 子类与父类有相同的方法时，子类的方法覆盖父类的方法
+class Dog(Animal):
+    def run(self):
+        print('%s is running' % type(self).__name__)
+
+
+dog = Dog()
+dog.run()
+
+
+# 判断变量是否是某个类型
+print(isinstance(animal, Animal))
+print(isinstance(dog, Animal))
+print(isinstance(dog, Dog))
+
+
+# 多态
+def run(cla):
+    cla.run()
+
+
+run(Animal())   # 调取Animal类
+run(Dog())
+run(animal)     # 调取实例
+run(dog)
+
