@@ -1,0 +1,82 @@
+1、安装ckeditor
+pip install django-ckeditor
+
+2、在setting.py的INSTALLED_APPS中添加ckeditor和ckeditor_uploader应用
+INSTALLED_APPS = [
+    ....,
+    'ckeditor',
+    'ckeditor_uploader'
+]
+
+3、在setting.py中添加下面配置
+ MEDIA_URL = "/media/" 
+ MEDIA_ROOT = os.path.join(BASE_DIR,"media")
+ CKEDITOR_UPLOAD_PATH = "uploads/"
+ CKEDITOR_IMAGE_BACKEND = 'pillow'
+ 
+ 4、配置ckeditor的功能和样式，也可以不配置使用默认的
+ CKEDITOR_CONFIGS = {
+    'default': {
+        'update': ['Image', 'Update', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak'],
+        'skin': 'moono',
+        'toolbar_Basic': [
+            ['Source', '-', 'Bold', 'Italic']
+        ],
+        'toolbar_YourCustomToolbarConfig': [
+            {'name': 'document', 'items': ['Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates']},
+            {'name': 'clipboard', 'items': ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']},
+            {'name': 'editing', 'items': ['Find', 'Replace', '-', 'SelectAll']},
+            {'name': 'forms',
+             'items': ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton',
+                       'HiddenField']},
+            '/',
+            {'name': 'basicstyles',
+             'items': ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat']},
+            {'name': 'paragraph',
+             'items': ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-',
+                       'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl',
+                       'Language']},
+            {'name': 'links', 'items': ['Link', 'Unlink', 'Anchor']},
+            {'name': 'insert',
+             'items': ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe']},
+            {'name': 'styles', 'items': ['Styles', 'Format', 'Font', 'FontSize']},
+            {'name': 'colors', 'items': ['TextColor', 'BGColor']},
+            {'name': 'tools', 'items': ['Maximize', 'ShowBlocks']},
+            {'name': 'yourcustomtools', 'items': [
+                # 自定义控件
+                'Preview',
+                'Maximize',
+            ]},
+        ],
+        'toolbar': 'YourCustomToolbarConfig',  # put selected toolbar config here
+        'tabSpaces': 4,
+        'extraPlugins': ','.join(
+            [
+                # your extra plugins here
+                'div',
+                'autolink',
+                'autoembed',
+                'embedsemantic',
+                'autogrow',
+                # 'devtools',
+                'widget',
+                'lineutils',
+                'clipboard',
+                'dialog',
+                'dialogui',
+                'elementspath'
+            ]),
+    }
+}
+
+5、修改Models.py,将models.TextField更改为RichTextUploadingField
+from ckeditor_uploader.fields import RichTextUploadingField
+class Article(models.Model):
+        content = RichTextUploadingField('正文')
+        
+ 6、修改根目录下的url.py
+  from django.conf.urls import url,include
+  urlpatterns = [
+        ....,
+        path('ckeditor/', include('ckeditor_uploader.urls'))
+    ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
