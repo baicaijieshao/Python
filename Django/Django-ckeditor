@@ -80,3 +80,19 @@ class Article(models.Model):
         ....,
         path('ckeditor/', include('ckeditor_uploader.urls'))
     ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+7、重新迁移
+python manage.py makemigrations
+python manage.py migrate
+
+至此后端界面可以显示后文本
+
+8、前端界面显示富文本
+将D:\Python\Python37\Lib\site-packages\ckeditor\static下的ckeditor文件夹复制到项目static文件夹下
+然后在创建页面导入ckeditor的js
+<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+然后使用CKEDITOR.replace()方法替换html中的<textarea>,comment为ID名
+    <script>
+        CKEDITOR.replace('comment');
+    </script>
